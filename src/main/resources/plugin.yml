@@ -1,5 +1,5 @@
 name: VerDirectRenewed
 version: @version@
 main: black.bracken.verdirectrenewed.VerDirectRenewed
-api-version: 1.17
+api-version: 1.16
 authors: [ blackbracken ]
