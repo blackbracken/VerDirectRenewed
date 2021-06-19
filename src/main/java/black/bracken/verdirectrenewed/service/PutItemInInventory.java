@@ -27,7 +27,7 @@ public final class PutItemInInventory {
             return;
         }
 
-        if (this.item.isInvulnerable()) {
+        if (this.item.isInvulnerable() || this.item.isDead()) {
             return;
         }
 
