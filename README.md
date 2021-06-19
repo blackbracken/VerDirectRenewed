@@ -11,7 +11,6 @@
 ![demo](https://raw.githubusercontent.com/blackbracken/VerDirectRenewed/master/demo.gif)
 
 ## 設定
-
 ```yaml
 # トリガーとなるアイテムの設定
 # これらを満たすいずれかのアイテムがプレイヤーのインベントリにあれば回収機能が発動する
@@ -72,7 +71,10 @@ Directing:
 
 ## パーミッション
 
-|パーミッション|効果|デフォルト| |:-:|:-:|:-:| |verdirect.*|このプラグインのすべての権限を持つ|op| |verdirect.use|回収することができるようになる|true|
+|パーミッション|効果|デフォルト|
+|:-:|:-:|:-:|
+|verdirect.*|このプラグインのすべての権限を持つ|op|
+|verdirect.use|回収することができるようになる|true|
 
 ## 検証環境
 
