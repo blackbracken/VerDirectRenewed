@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
 
 public final class ItemDroppedListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getBlockBreakSection();
         if (!cfg.isEnabled()) return;
@@ -28,7 +28,7 @@ public final class ItemDroppedListener implements Listener {
         new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).invoke();
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getCreatureSection();
         if (!cfg.isEnabled()) return;
@@ -44,21 +44,20 @@ public final class ItemDroppedListener implements Listener {
         Location center = victim.getLocation();
 
         if ((victim.getHealth() - event.getFinalDamage()) <= 0) {
-            // TODO: reserve
+            new PickupAroundItemsLate(attacker, center, delayTicks, pickupRange).invoke();
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onPlayerShearEntity(PlayerShearEntityEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getShearSection();
         if (!cfg.isEnabled()) return;
 
         int delayTicks = cfg.getDelayTicks();
         double pickupRange = cfg.getRange();
-
         Location center = event.getEntity().getLocation();
 
-        // TODO: reserve
+        new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).invoke();
     }
 
 }

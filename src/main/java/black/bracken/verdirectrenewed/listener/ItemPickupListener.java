@@ -8,10 +8,8 @@ import org.bukkit.event.Listener;
 
 public final class ItemPickupListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onItemPickup(VerDirectPickupEvent event) {
-        if (event.isCancelled()) return;
-
         new PutItemInInventory(event.getPlayer(), event.getItem()).invoke();
     }
 
