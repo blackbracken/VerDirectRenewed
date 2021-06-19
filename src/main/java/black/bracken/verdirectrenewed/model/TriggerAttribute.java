@@ -1,8 +1,11 @@
 package black.bracken.verdirectrenewed.model;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Objects;
 
 public final class TriggerAttribute {
 
@@ -18,6 +21,14 @@ public final class TriggerAttribute {
         this.materialCondition = materialCondition;
         this.nameCondition = nameCondition;
         this.loreCondition = loreCondition;
+    }
+
+    public boolean match(ItemStack itemStack) {
+        ItemMeta meta = itemStack.getItemMeta();
+
+        return matchMaterial(itemStack.getType())
+                && matchName(meta != null ? meta.getDisplayName() : null)
+                && matchLore(meta != null ? meta.getLore() : null);
     }
 
     private boolean matchMaterial(Material material) {
@@ -53,7 +64,7 @@ public final class TriggerAttribute {
 
             @Override
             public boolean match(T value) {
-                return this.value.equals(value);
+                return Objects.equals(this.value, value);
             }
         }
 

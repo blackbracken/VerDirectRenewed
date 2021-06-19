@@ -1,14 +1,12 @@
 package black.bracken.verdirectrenewed.service;
 
+import black.bracken.verdirectrenewed.util.InventoryUtil;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
-import java.util.Spliterators;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public final class PutItemInInventory {
 
@@ -38,14 +36,7 @@ public final class PutItemInInventory {
     private boolean canPutItemInInventory(Inventory inventory, ItemStack pickedUp) {
         if (inventory.firstEmpty() != -1) return true;
 
-        Stream<ItemStack> itemStackStream = StreamSupport.stream(
-                Spliterators.spliteratorUnknownSize(
-                        inventory.iterator(),
-                        0
-                ),
-                false
-        );
-        return itemStackStream
+        return InventoryUtil.itemStackStream(inventory)
                 .filter(Objects::nonNull)
                 .anyMatch(itemStack ->
                         itemStack.isSimilar(pickedUp) && itemStack.getAmount() < itemStack.getMaxStackSize()

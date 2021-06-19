@@ -170,7 +170,7 @@ public final class VerDirectRenewedConfig {
     private static EventSection getEventSection(ConfigurationSection section) {
         boolean isEnabled = section.getBoolean("Enable", false);
         int delay = section.getInt("Delay", 4);
-        double range = section.getDouble("Range", 1.5);
+        double range = section.getDouble("Range", 2.0);
 
         return new EventSection(isEnabled, delay, range);
     }
@@ -186,6 +186,7 @@ public final class VerDirectRenewedConfig {
             this.range = range;
         }
 
+        @SuppressWarnings("BooleanMethodIsAlwaysInverted")
         public boolean isEnabled() {
             return isEnabled;
         }

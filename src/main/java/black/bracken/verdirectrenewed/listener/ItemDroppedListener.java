@@ -18,9 +18,7 @@ public final class ItemDroppedListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onBlockBreak(BlockBreakEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getBlockBreakSection();
-        if (!cfg.isEnabled()) {
-            return;
-        }
+        if (!cfg.isEnabled()) return;
 
         int delayTicks = cfg.getDelayTicks();
         double pickupRange = cfg.getRange();
@@ -33,9 +31,7 @@ public final class ItemDroppedListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getCreatureSection();
-        if (!cfg.isEnabled()) {
-            return;
-        }
+        if (!cfg.isEnabled()) return;
 
         int delayTicks = cfg.getDelayTicks();
         double pickupRange = cfg.getRange();
@@ -55,9 +51,7 @@ public final class ItemDroppedListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerShearEntity(PlayerShearEntityEvent event) {
         VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getShearSection();
-        if (!cfg.isEnabled()) {
-            return;
-        }
+        if (!cfg.isEnabled()) return;
 
         int delayTicks = cfg.getDelayTicks();
         double pickupRange = cfg.getRange();
