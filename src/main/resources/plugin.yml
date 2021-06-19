@@ -3,3 +3,9 @@ version: @version@
 main: black.bracken.verdirectrenewed.VerDirectRenewed
 api-version: 1.16
 authors: [ blackbracken ]
+
+permissions:
+  verdirect.*:
+    default: op
+  verdirect.use:
+    default: true

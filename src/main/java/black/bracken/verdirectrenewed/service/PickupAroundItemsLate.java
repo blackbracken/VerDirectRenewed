@@ -6,17 +6,17 @@ import black.bracken.verdirectrenewed.model.TriggerAttribute;
 import black.bracken.verdirectrenewed.util.InventoryUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class PickupAroundItemsLate {
+
+    private static final String PERMISSION_USE = "verdirect.use";
 
     private final Player player;
     private final Location center;
@@ -39,6 +39,10 @@ public final class PickupAroundItemsLate {
 
     private boolean shouldPickup() {
         if (!this.player.isOnline() || this.player.isDead()) {
+            return false;
+        }
+
+        if (!this.player.hasPermission(PERMISSION_USE)) {
             return false;
         }
 
