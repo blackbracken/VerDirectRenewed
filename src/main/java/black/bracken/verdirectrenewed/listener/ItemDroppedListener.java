@@ -1,8 +1,9 @@
 package black.bracken.verdirectrenewed.listener;
 
+import black.bracken.verdirectrenewed.VerDirectRenewed;
+import black.bracken.verdirectrenewed.config.VerDirectRenewedConfig;
 import black.bracken.verdirectrenewed.service.PickupAroundItemsLate;
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,38 +15,30 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
 
 public final class ItemDroppedListener implements Listener {
 
-    private static final String CFG_BLOCK_BREAK_ROOT = "Event.BlockBreak";
-    private static final String CFG_CREATURE_ROOT = "Event.Creature";
-    private static final String CFG_SHEAR_ROOT = "Event.Shear";
-
-    private final FileConfiguration config;
-
-    public ItemDroppedListener(FileConfiguration config) {
-        this.config = config;
-    }
-
     @EventHandler(priority = EventPriority.LOW)
     public void onBlockBreak(BlockBreakEvent event) {
-        boolean enablesListener = config.getBoolean(CFG_BLOCK_BREAK_ROOT + ".Enable", false);
-        if (!enablesListener) {
+        VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getBlockBreakSection();
+        if (!cfg.isEnabled()) {
             return;
         }
-        int delayTicks = config.getInt(CFG_BLOCK_BREAK_ROOT + ".Delay", 1);
-        double pickupRange = config.getDouble(CFG_BLOCK_BREAK_ROOT + ".Range", 2.0);
+
+        int delayTicks = cfg.getDelayTicks();
+        double pickupRange = cfg.getRange();
 
         Location center = event.getBlock().getLocation().add(0.5, 0, 0.5);
 
-        new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).reserve();
+        new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).invoke();
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        boolean enablesListener = config.getBoolean(CFG_CREATURE_ROOT + ".Enable", false);
-        if (!enablesListener) {
+        VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getCreatureSection();
+        if (!cfg.isEnabled()) {
             return;
         }
-        int delayTicks = config.getInt(CFG_CREATURE_ROOT + ".Delay", 1);
-        double pickupRange = config.getDouble(CFG_CREATURE_ROOT + ".Range", 2.0);
+
+        int delayTicks = cfg.getDelayTicks();
+        double pickupRange = cfg.getRange();
 
         if (!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof LivingEntity)) {
             return;
@@ -61,12 +54,13 @@ public final class ItemDroppedListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerShearEntity(PlayerShearEntityEvent event) {
-        boolean enablesListener = config.getBoolean(CFG_SHEAR_ROOT + ".Enable", false);
-        if (!enablesListener) {
+        VerDirectRenewedConfig.EventSection cfg = VerDirectRenewed.getVerDirectConfig().getShearSection();
+        if (!cfg.isEnabled()) {
             return;
         }
-        int delayTicks = config.getInt(CFG_SHEAR_ROOT + ".Delay", 1);
-        double pickupRange = config.getDouble(CFG_SHEAR_ROOT + ".Range", 2.0);
+
+        int delayTicks = cfg.getDelayTicks();
+        double pickupRange = cfg.getRange();
 
         Location center = event.getEntity().getLocation();
 

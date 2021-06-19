@@ -41,7 +41,9 @@ public final class VerDirectPickupEvent extends Event implements Cancellable {
         return player;
     }
 
-    public Item getItem() { return item; }
+    public Item getItem() {
+        return item;
+    }
 
     @SuppressWarnings("unused")
     public static HandlerList getHandlerList() {

@@ -26,7 +26,7 @@ public final class PickupAroundItemsLate {
         this.range = range;
     }
 
-    public void reserve() {
+    public void invoke() {
         Plugin instance = VerDirectRenewed.getInstance();
         if (instance == null) return;
 

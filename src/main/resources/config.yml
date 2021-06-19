@@ -1,0 +1,42 @@
+TriggerAttributes:
+  "0":
+    Material:
+      Limit: true
+      Value: CHEST
+    Name:
+      Limit: false
+    Lore:
+      Limit: false
+  "1":
+    Material:
+      Limit: true
+      Value: BARREL
+    Name:
+      Limit: true
+      Value: "&cWand"
+    Lore:
+      Limit: true
+      Value:
+        - "&9MagicWand"
+  "2":
+    Material:
+      Limit: false
+    Name:
+      Limit: true
+      Value: "&aCollector"
+    Lore:
+      Limit: false
+
+Event:
+  BlockBreak:
+    Enable: true
+    Delay: 4
+    Range: 1.0
+  Shear:
+    Enable: true
+    Delay: 4
+    Range: 2.0
+  Creature:
+    Enable: true
+    Delay: 4
+    Range: 3.0
