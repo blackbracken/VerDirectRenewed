@@ -6,6 +6,9 @@
 
 ブロックの破壊や敵のドロップによるアイテムを直接インベントリに投入するようにするプラグインです.
 
+# ダウンロード
+[Releases](https://github.com/blackbracken/VerDirectRenewed/releases) から
+
 ## デモ
 
 ![demo](https://raw.githubusercontent.com/blackbracken/VerDirectRenewed/master/demo.gif?token=AEMFVRQ57LMVRJLAI6WFBWLA23NQI)
@@ -64,9 +67,10 @@ Event:
     Delay: 4
     Range: 2.0
 
+# 破壊時の演出設定
 Directing:
-  Sound: true
-  Effect: false
+  Sound: true # 音を鳴らすか
+  Effect: false # パーティクルによるエフェクトを出すか
 ```
 
 ## パーミッション
