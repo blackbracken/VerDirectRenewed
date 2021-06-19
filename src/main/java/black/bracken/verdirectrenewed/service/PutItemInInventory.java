@@ -19,18 +19,22 @@ public final class PutItemInInventory {
     }
 
     public void invoke() {
-        if (!player.isOnline() || player.isDead()) {
+        if (!this.player.isOnline() || this.player.isDead()) {
             return;
         }
 
-        if (!canPutItemInInventory(player.getInventory(), item.getItemStack())) {
+        if (this.item.isInvulnerable()) {
             return;
         }
 
-        player.getInventory().addItem(item.getItemStack());
-        item.remove();
+        if (!canPutItemInInventory(this.player.getInventory(), this.item.getItemStack())) {
+            return;
+        }
 
-        player.updateInventory();
+        this.player.getInventory().addItem(this.item.getItemStack());
+        this.item.remove();
+
+        this.player.updateInventory();
     }
 
     private boolean canPutItemInInventory(Inventory inventory, ItemStack pickedUp) {
