@@ -41,3 +41,7 @@ Event:
     Enable: true
     Delay: 4
     Range: 2.0
+
+Directing:
+  Sound: true
+  Effect: false

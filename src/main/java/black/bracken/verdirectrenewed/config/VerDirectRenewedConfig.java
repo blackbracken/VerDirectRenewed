@@ -17,20 +17,26 @@ public final class VerDirectRenewedConfig {
     private final List<TriggerAttribute> triggerAttributes;
 
     private final EventSection blockBreakSection;
-
     private final EventSection shearSection;
     private final EventSection creatureSection;
+
+    private final boolean enablesDirectingSound;
+    private final boolean enablesDirectingEffect;
 
     private VerDirectRenewedConfig(
             List<TriggerAttribute> triggerAttributes,
             EventSection blockBreakSection,
             EventSection shearSection,
-            EventSection creatureSection
+            EventSection creatureSection,
+            boolean enablesDirectingSound,
+            boolean enablesDirectingEffect
     ) {
         this.triggerAttributes = triggerAttributes;
         this.blockBreakSection = blockBreakSection;
         this.shearSection = shearSection;
         this.creatureSection = creatureSection;
+        this.enablesDirectingSound = enablesDirectingSound;
+        this.enablesDirectingEffect = enablesDirectingEffect;
     }
 
     public List<TriggerAttribute> getTriggerAttributes() {
@@ -96,13 +102,23 @@ public final class VerDirectRenewedConfig {
                                     .collect(Collectors.toList()),
                             getEventSection(blockBreakSection),
                             getEventSection(shearSection),
-                            getEventSection(creatureSection)
+                            getEventSection(creatureSection),
+                            configFile.getBoolean("Directing.Sound", false),
+                            configFile.getBoolean("Directing.Effect", false)
                     )
             );
         } catch (Exception ex) {
             ex.printStackTrace();
             return Either.left(new InvalidConfigurationError("Unexpected error happened on loading config.yml."));
         }
+    }
+
+    public boolean isEnablesDirectingEffect() {
+        return enablesDirectingEffect;
+    }
+
+    public boolean isEnablesDirectingSound() {
+        return enablesDirectingSound;
     }
 
     private static Either<InvalidConfigurationError, TriggerAttribute> getTriggerAttribute(ConfigurationSection section) {

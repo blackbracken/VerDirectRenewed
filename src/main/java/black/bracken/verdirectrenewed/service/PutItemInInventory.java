@@ -1,6 +1,10 @@
 package black.bracken.verdirectrenewed.service;
 
+import black.bracken.verdirectrenewed.VerDirectRenewed;
+import black.bracken.verdirectrenewed.config.VerDirectRenewedConfig;
 import black.bracken.verdirectrenewed.util.InventoryUtil;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -31,6 +35,10 @@ public final class PutItemInInventory {
             return;
         }
 
+        VerDirectRenewedConfig cfg = VerDirectRenewed.getVerDirectConfig();
+        if (cfg.isEnablesDirectingSound()) playSound();
+        if (cfg.isEnablesDirectingEffect()) playEffect();
+
         this.player.getInventory().addItem(this.item.getItemStack());
         this.item.remove();
 
@@ -45,6 +53,14 @@ public final class PutItemInInventory {
                 .anyMatch(itemStack ->
                         itemStack.isSimilar(pickedUp) && itemStack.getAmount() < itemStack.getMaxStackSize()
                 );
+    }
+
+    private void playSound() {
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 0.5f, (float) (1.5 + 0.5 * Math.random()));
+    }
+
+    private void playEffect() {
+        player.spawnParticle(Particle.CRIT, item.getLocation(), 2, 0.1, 0.1, 0.1, 0);
     }
 
 }
