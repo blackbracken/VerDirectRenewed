@@ -8,7 +8,7 @@
 
 ## デモ
 
-![demo](https://raw.githubusercontent.com/blackbracken/VerDirectRenewed/master/demo.gif)
+![demo](https://raw.githubusercontent.com/blackbracken/VerDirectRenewed/master/demo.gif?token=AEMFVRQ57LMVRJLAI6WFBWLA23NQI)
 
 ## 設定
 ```yaml
