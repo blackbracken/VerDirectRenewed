@@ -113,11 +113,11 @@ public final class VerDirectRenewedConfig {
         }
     }
 
-    public boolean isEnablesDirectingEffect() {
+    public boolean enablesDirectingEffect() {
         return enablesDirectingEffect;
     }
 
-    public boolean isEnablesDirectingSound() {
+    public boolean enablesDirectingSound() {
         return enablesDirectingSound;
     }
 

@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Objects;
-
 public final class PutItemInInventory {
 
     private final Player player;
@@ -27,17 +25,13 @@ public final class PutItemInInventory {
             return;
         }
 
-        if (this.item.isInvulnerable() || this.item.isDead()) {
-            return;
-        }
-
         if (!canPutItemInInventory(this.player.getInventory(), this.item.getItemStack())) {
             return;
         }
 
         VerDirectRenewedConfig cfg = VerDirectRenewed.getVerDirectConfig();
-        if (cfg.isEnablesDirectingSound()) playSound();
-        if (cfg.isEnablesDirectingEffect()) playEffect();
+        if (cfg.enablesDirectingSound()) playSound();
+        if (cfg.enablesDirectingEffect()) playEffect();
 
         this.player.getInventory().addItem(this.item.getItemStack());
         this.item.remove();
@@ -49,7 +43,6 @@ public final class PutItemInInventory {
         if (inventory.firstEmpty() != -1) return true;
 
         return InventoryUtil.itemStackStream(inventory)
-                .filter(Objects::nonNull)
                 .anyMatch(itemStack ->
                         itemStack.isSimilar(pickedUp) && itemStack.getAmount() < itemStack.getMaxStackSize()
                 );

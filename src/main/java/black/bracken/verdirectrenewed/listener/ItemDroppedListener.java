@@ -2,7 +2,7 @@ package black.bracken.verdirectrenewed.listener;
 
 import black.bracken.verdirectrenewed.VerDirectRenewed;
 import black.bracken.verdirectrenewed.config.VerDirectRenewedConfig;
-import black.bracken.verdirectrenewed.service.PickupAroundItemsLate;
+import black.bracken.verdirectrenewed.service.ReserveToGatherAroundItems;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public final class ItemDroppedListener implements Listener {
 
         Location center = event.getBlock().getLocation().add(0.5, 0, 0.5);
 
-        new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).invoke();
+        new ReserveToGatherAroundItems(event.getPlayer(), center, delayTicks, pickupRange).invoke();
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -44,7 +44,7 @@ public final class ItemDroppedListener implements Listener {
         Location center = victim.getLocation();
 
         if ((victim.getHealth() - event.getFinalDamage()) <= 0) {
-            new PickupAroundItemsLate(attacker, center, delayTicks, pickupRange).invoke();
+            new ReserveToGatherAroundItems(attacker, center, delayTicks, pickupRange).invoke();
         }
     }
 
@@ -57,7 +57,7 @@ public final class ItemDroppedListener implements Listener {
         double pickupRange = cfg.getRange();
         Location center = event.getEntity().getLocation();
 
-        new PickupAroundItemsLate(event.getPlayer(), center, delayTicks, pickupRange).invoke();
+        new ReserveToGatherAroundItems(event.getPlayer(), center, delayTicks, pickupRange).invoke();
     }
 
 }

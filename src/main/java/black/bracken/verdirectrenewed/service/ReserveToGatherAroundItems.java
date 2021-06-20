@@ -14,7 +14,7 @@ import org.bukkit.plugin.PluginManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class PickupAroundItemsLate {
+public final class ReserveToGatherAroundItems {
 
     private static final String PERMISSION_USE = "verdirect.use";
 
@@ -23,7 +23,7 @@ public final class PickupAroundItemsLate {
     private final long delayTicks;
     private final double range;
 
-    public PickupAroundItemsLate(Player player, Location center, int delayTicks, double range) {
+    public ReserveToGatherAroundItems(Player player, Location center, int delayTicks, double range) {
         this.player = player;
         this.center = center;
         this.delayTicks = delayTicks;
@@ -60,6 +60,7 @@ public final class PickupAroundItemsLate {
                 .stream()
                 .filter(entity -> entity instanceof Item)
                 .map(item -> (Item) item)
+                .filter(item -> !item.isInvulnerable() && !item.isDead())
                 .collect(Collectors.toList());
 
         final PluginManager pm = Bukkit.getPluginManager();
